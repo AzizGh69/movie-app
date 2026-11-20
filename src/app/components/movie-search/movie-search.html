@@ -1,1 +1,23 @@
-<p>movie-search works!</p>
+<header class="search-header">
+  <h2 class="results-title">Results for "{{ title$ | async }}"</h2>
+  <a class="back-link" routerLink="/">← Back to movie list</a>
+</header>
+
+@if (movies$ | async; as movies) {
+  <section class="movie-grid">
+    @for (movie of movies; track movie.id) {
+      <a class="movie-card" [routerLink]="['/movie', movie.id]">
+        @if (movie.poster_path) {
+          <img [src]="posterUrl(movie)" [alt]="movie.title" loading="lazy" />
+        } @else {
+          <div class="no-poster">No poster</div>
+        }
+        <span class="movie-title">{{ movie.title }}</span>
+      </a>
+    } @empty {
+      <p class="message">No movies found.</p>
+    }
+  </section>
+} @else {
+  <p class="message">Searching…</p>
+}
