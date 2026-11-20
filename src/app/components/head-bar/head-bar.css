@@ -1,0 +1,42 @@
+.head-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--yellow);
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+h1 a {
+  color: #000;
+  text-decoration: none;
+}
+
+.wishlist-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #000;
+  color: var(--yellow);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.wishlist-button:hover {
+  background-color: #222;
+}
+
+.heart {
+  color: var(--yellow);
+}
