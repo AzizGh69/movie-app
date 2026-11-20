@@ -48,20 +48,20 @@ Routes: `''`→MovieList · `movie/:id`→MovieDetail · `search/:title`→Movie
 Data flow: search-bar emits title via `output()` → movie-list shows results or default list (`ngIf/else`); poster click → `/movie/:id` → `ActivatedRoute` id → `getMovieById`; heart toggles `WishlistService`; posters from `https://image.tmdb.org/t/p/w500{poster_path}`.
 
 ## Milestones (branch → `--no-ff` merge into `main`)
-| # | Branch | Work |
-|---|---|---|
-| M0 | `main` | Repo, PLAN.md, .gitignore (exists) |
-| M0.5 | `chore/api-postman` | Step 0: Postman collection export committed, sample responses noted |
-| M1 | `feat/setup` | `ng new movie-app` (standalone, CSS), Font Awesome, environment files, generate components/service/interface |
-| M2 | `feat/movie-service` | Movie interface from a real Postman response, 3 service methods, `provideHttpClient(withFetch())` |
-| M3 | `feat/routing` | routes + `provideRouter` + `<router-outlet>` |
-| M4 | `feat/head-bar` | Figure 2 |
-| M5 | `feat/movie-list` | Figure 1 poster grid |
-| M6 | `feat/search-bar` | live search, child→parent, `ngIf/else`, movie-search page |
-| M7 | `feat/movie-detail` | Figure 4 |
-| M8 | `feat/wishlist` | wishlist service + page, heart toggle |
-| M9 | `chore/polish` | loading/error states, responsive, README, `ng build`, tag `v1.0.0` |
-| M10 | `chore/deploy` | GitHub repo + `ng build --base-href /movie-app/` published to `gh-pages` (needs user OK before pushing) |
+| # | Branch | Work | Status |
+|---|---|---|---|
+| M0 | `main` | Repo, PLAN.md, .gitignore (exists) | ✅ done |
+| M0.5 | `chore/api-postman` | Step 0: Postman collection export committed, sample responses noted | ✅ done |
+| M1 | `feat/setup` | `ng new movie-app` (standalone, CSS), Font Awesome, environment files, generate components/service/interface | ✅ done |
+| M2 | `feat/movie-service` | Movie interface from a real Postman response, 3 service methods, `provideHttpClient(withFetch())` | ✅ done |
+| M3 | `feat/routing` | routes + `provideRouter` + `<router-outlet>` | ✅ done |
+| M4 | `feat/head-bar` | Figure 2 | ✅ done |
+| M5 | `feat/movie-list` | Figure 1 poster grid | ✅ done |
+| M6 | `feat/search-bar` | live search, child→parent, `ngIf/else`, movie-search page | ✅ done |
+| M7 | `feat/movie-detail` | Figure 4 | ✅ done |
+| M8 | `feat/wishlist` | wishlist service + page, heart toggle | ✅ done |
+| M9 | `chore/polish` | loading/error states, responsive, README, `ng build`, tag `v1.0.0` | ✅ done |
+| M10 | `chore/deploy` | GitHub repo + `ng build --base-href /movie-app/` published to `gh-pages` (needs user OK before pushing) | ⏳ next |
 
 Commits: conventional (`feat(service): add getMovieById`), small and per step.
 
