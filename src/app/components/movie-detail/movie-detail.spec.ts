@@ -4,6 +4,7 @@ import { RouterTestingHarness } from '@angular/router/testing';
 import { Observable, of, throwError } from 'rxjs';
 import { MovieDetails } from '../../models/movie';
 import { MovieService } from '../../services/movie.service';
+import { WishlistService } from '../../services/wishlist.service';
 import { MovieDetail } from './movie-detail';
 
 const equalizer = {
@@ -38,7 +39,7 @@ async function open(url: string, getMovieById: (id: number) => Observable<MovieD
   });
   const harness = await RouterTestingHarness.create();
   await harness.navigateByUrl(url, MovieDetail);
-  return { element: harness.routeNativeElement as HTMLElement, requestedIds };
+  return { harness, element: harness.routeNativeElement as HTMLElement, requestedIds };
 }
 
 function field(element: HTMLElement, label: string): string | undefined {
@@ -47,6 +48,8 @@ function field(element: HTMLElement, label: string): string | undefined {
 }
 
 describe('MovieDetail', () => {
+  beforeEach(() => localStorage.clear());
+
   it('loads the movie whose id is in the URL', async () => {
     const { requestedIds } = await open('/movie/926393', () => of(equalizer));
     expect(requestedIds).toEqual([926393]);
@@ -69,5 +72,23 @@ describe('MovieDetail', () => {
   it('shows an error message when the movie cannot be loaded', async () => {
     const { element } = await open('/movie/1', () => throwError(() => new Error('404')));
     expect(element.textContent).toContain('This movie could not be loaded.');
+  });
+
+  it('the heart adds the movie to the wish list and turns active, then removes it', async () => {
+    const { harness, element } = await open('/movie/926393', () => of(equalizer));
+    const wishlist = TestBed.inject(WishlistService);
+    const heart = element.querySelector('.heart-button') as HTMLButtonElement;
+
+    expect(heart.classList).not.toContain('active');
+    heart.click();
+    await harness.fixture.whenStable();
+    expect(wishlist.has(926393)).toBe(true);
+    expect(heart.classList).toContain('active');
+    expect(heart.getAttribute('aria-pressed')).toBe('true');
+
+    heart.click();
+    await harness.fixture.whenStable();
+    expect(wishlist.has(926393)).toBe(false);
+    expect(heart.classList).not.toContain('active');
   });
 });
