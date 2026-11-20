@@ -61,7 +61,7 @@ Data flow: search-bar emits title via `output()` → movie-list shows results or
 | M7 | `feat/movie-detail` | Figure 4 | ✅ done |
 | M8 | `feat/wishlist` | wishlist service + page, heart toggle | ✅ done |
 | M9 | `chore/polish` | loading/error states, responsive, README, `ng build`, tag `v1.0.0` | ✅ done |
-| M10 | `chore/deploy` | GitHub repo + `ng build --base-href /movie-app/` published to `gh-pages` (needs user OK before pushing) | ⏳ next |
+| M10 | `chore/deploy` | GitHub repo + `ng build --base-href /movie-app/` published to `gh-pages` (needs user OK before pushing) | ✅ done: live at https://azizgh69.github.io/movie-app/ |
 
 Commits: conventional (`feat(service): add getMovieById`), small and per step.
 
