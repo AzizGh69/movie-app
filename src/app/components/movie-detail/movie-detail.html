@@ -1,1 +1,45 @@
-<p>movie-detail works!</p>
+@if (movie$ | async; as movie) {
+  <article class="movie-detail">
+    <div class="poster">
+      @if (movie.poster_path) {
+        <img [src]="posterUrl(movie)" [alt]="movie.title" />
+      } @else {
+        <div class="no-poster">No poster</div>
+      }
+    </div>
+
+    <div class="info">
+      <h2>{{ movie.title }}</h2>
+
+      <dl>
+        <dt>Original title</dt>
+        <dd>{{ movie.original_title }}</dd>
+
+        <dt>Original language</dt>
+        <dd>{{ movie.original_language }}</dd>
+
+        <dt>Release date</dt>
+        <dd>{{ movie.release_date | date: 'mediumDate' }}</dd>
+
+        <dt>Popularity</dt>
+        <dd>{{ movie.popularity | number: '1.0-3' }}</dd>
+
+        <dt>Vote average</dt>
+        <dd>{{ movie.vote_average | number: '1.1-1' }}</dd>
+
+        <dt>Vote count</dt>
+        <dd>{{ movie.vote_count }}</dd>
+      </dl>
+
+      <h3>Overview</h3>
+      <p class="overview">{{ movie.overview || 'No overview available.' }}</p>
+
+      <a class="back-link" routerLink="/">← Back to movie list</a>
+    </div>
+  </article>
+} @else if (loadError()) {
+  <p class="message">This movie could not be loaded.</p>
+  <p class="message"><a class="back-link" routerLink="/">← Back to movie list</a></p>
+} @else {
+  <p class="message">Loading movie…</p>
+}

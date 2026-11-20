@@ -1,0 +1,88 @@
+.movie-detail {
+  display: grid;
+  grid-template-columns: minmax(180px, 320px) 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.25rem;
+}
+
+.poster {
+  position: relative;
+}
+
+.poster img,
+.no-poster {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+.no-poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  color: #888;
+}
+
+h2 {
+  margin: 0.25rem 0 1rem;
+  font-size: 1.6rem;
+}
+
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.3rem 1.5rem;
+  margin: 0 0 0.75rem;
+}
+
+dt,
+h3 {
+  color: var(--yellow);
+  font-weight: bold;
+}
+
+dd {
+  margin: 0;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.overview {
+  margin: 0.3rem 0 1.25rem;
+  line-height: 1.5;
+}
+
+.back-link {
+  color: var(--yellow);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.message {
+  padding: 1rem 2rem 0;
+  text-align: center;
+  color: var(--yellow);
+}
+
+@media (max-width: 600px) {
+  .movie-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .poster {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
