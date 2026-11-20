@@ -1,0 +1,65 @@
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  padding: 0.5rem;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+
+.movie-card:hover {
+  transform: scale(1.03);
+}
+
+.movie-card img,
+.no-poster {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.no-poster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  color: #888;
+}
+
+.movie-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  margin-top: 0.3rem;
+  padding: 0.2rem 0.4rem;
+  background-color: var(--yellow);
+  color: #000;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.message {
+  padding: 2rem;
+  text-align: center;
+  color: var(--yellow);
+}
+
+@media (max-width: 900px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
