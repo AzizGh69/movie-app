@@ -33,7 +33,7 @@ export interface Genre {
 }
 
 /** A single movie: /movie/{id} (genres instead of genre_ids, plus extra fields) */
-export interface MovieDetail extends Omit<Movie, 'genre_ids'> {
+export interface MovieDetails extends Omit<Movie, 'genre_ids'> {
   budget: number;
   genres: Genre[];
   homepage: string | null;

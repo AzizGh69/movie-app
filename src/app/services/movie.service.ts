@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { map, Observable, of, shareReplay } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Movie, MovieDetail, MovieListResponse } from '../models/movie';
+import { Movie, MovieDetails, MovieListResponse } from '../models/movie';
 
 @Service()
 export class MovieService {
@@ -24,8 +24,8 @@ export class MovieService {
   }
 
   /** One movie by its TMDB id. */
-  getMovieById(id: number): Observable<MovieDetail> {
-    return this.httpClient.get<MovieDetail>(`${this.apiUrl}/movie/${id}?api_key=${this.apiKey}`);
+  getMovieById(id: number): Observable<MovieDetails> {
+    return this.httpClient.get<MovieDetails>(`${this.apiUrl}/movie/${id}?api_key=${this.apiKey}`);
   }
 
   /** Movies whose title matches the search text. Empty text → empty list, no request. */
