@@ -1,0 +1,90 @@
+{
+  "info": {
+    "name": "TMDB movie-app",
+    "description": "Requests used by movie-app (TP-3). Set the collection variable `apiKey` to your TMDB v3 API key in Postman. Never commit the key.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.themoviedb.org/3" },
+    { "key": "apiKey", "value": "" },
+    { "key": "movieId", "value": "926393" },
+    { "key": "title", "value": "equalizer" }
+  ],
+  "item": [
+    {
+      "name": "getMovieList - now playing",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/movie/now_playing?api_key={{apiKey}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["movie", "now_playing"],
+          "query": [{ "key": "api_key", "value": "{{apiKey}}" }]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status 200', () => pm.response.to.have.status(200));",
+              "pm.test('results is an array', () => pm.expect(pm.response.json().results).to.be.an('array'));"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "getMovieById - movie details",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/movie/{{movieId}}?api_key={{apiKey}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["movie", "{{movieId}}"],
+          "query": [{ "key": "api_key", "value": "{{apiKey}}" }]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status 200', () => pm.response.to.have.status(200));",
+              "pm.test('has id and title', () => { const m = pm.response.json(); pm.expect(m.id).to.be.a('number'); pm.expect(m.title).to.be.a('string'); });"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "getMovieByTitle - search",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/search/movie?query={{title}}&api_key={{apiKey}}",
+          "host": ["{{baseUrl}}"],
+          "path": ["search", "movie"],
+          "query": [
+            { "key": "query", "value": "{{title}}" },
+            { "key": "api_key", "value": "{{apiKey}}" }
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('status 200', () => pm.response.to.have.status(200));",
+              "pm.test('results is an array', () => pm.expect(pm.response.json().results).to.be.an('array'));"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
