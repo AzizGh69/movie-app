@@ -1,1 +1,15 @@
-<p>search-bar works!</p>
+<div class="search-bar">
+  <label for="movie-title" class="search-label">
+    <fa-icon [icon]="faMagnifyingGlass" />
+    <span class="visually-hidden">Search a movie by title</span>
+  </label>
+  <input
+    #titleInput
+    id="movie-title"
+    type="search"
+    placeholder="movie title"
+    autocomplete="off"
+    (input)="searchMovieByTitle(titleInput.value)"
+    (keyup.enter)="openSearchPage(titleInput.value)"
+  />
+</div>

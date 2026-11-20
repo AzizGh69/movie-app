@@ -1,22 +1,46 @@
-@if (movies$ | async; as movies) {
-  @if (loadError()) {
-    <p class="message">Could not load the movies. Check your TMDB API key and connection.</p>
-  } @else {
-    <section class="movie-grid">
-      @for (movie of movies; track movie.id) {
-        <a class="movie-card" [routerLink]="['/movie', movie.id]">
-          @if (movie.poster_path) {
-            <img [src]="posterUrl(movie)" [alt]="movie.title" loading="lazy" />
-          } @else {
-            <div class="no-poster">No poster</div>
-          }
-          <span class="movie-title">{{ movie.title }}</span>
-        </a>
-      } @empty {
-        <p class="message">No movies found.</p>
-      }
-    </section>
-  }
-} @else {
+<app-search-bar (titleChange)="onTitleChange($event)" />
+
+<!-- A title was typed: show the search results, otherwise the now-playing list -->
+<div *ngIf="searchTitle(); else nowPlaying">
+  <ng-container *ngIf="searchResults$ | async as results; else searching">
+    <h2 class="results-title">Results for "{{ searchTitle() }}"</h2>
+    <ng-container *ngTemplateOutlet="movieGrid; context: { $implicit: results }" />
+  </ng-container>
+</div>
+
+<ng-template #searching>
+  <p class="message">Searching…</p>
+</ng-template>
+
+<ng-template #nowPlaying>
+  <ng-container *ngIf="movies$ | async as movies; else loading">
+    <p *ngIf="loadError(); else grid" class="message">
+      Could not load the movies. Check your TMDB API key and connection.
+    </p>
+    <ng-template #grid>
+      <ng-container *ngTemplateOutlet="movieGrid; context: { $implicit: movies }" />
+    </ng-template>
+  </ng-container>
+</ng-template>
+
+<ng-template #loading>
   <p class="message">Loading movies…</p>
-}
+</ng-template>
+
+<!-- Poster grid, reused for both lists -->
+<ng-template #movieGrid let-movies>
+  <section class="movie-grid">
+    @for (movie of movies; track movie.id) {
+      <a class="movie-card" [routerLink]="['/movie', movie.id]">
+        @if (movie.poster_path) {
+          <img [src]="posterUrl(movie)" [alt]="movie.title" loading="lazy" />
+        } @else {
+          <div class="no-poster">No poster</div>
+        }
+        <span class="movie-title">{{ movie.title }}</span>
+      </a>
+    } @empty {
+      <p class="message">No movies found.</p>
+    }
+  </section>
+</ng-template>
