@@ -1,0 +1,43 @@
+.wishlist-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.75rem 1rem 0 0;
+}
+
+.wishlist-header fa-icon {
+  color: #e50914;
+}
+
+.back-link {
+  color: var(--yellow);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.wishlist-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.remove-button {
+  padding: 0.35rem;
+  border: 1px solid var(--yellow);
+  border-radius: 4px;
+  background-color: var(--black);
+  color: var(--yellow);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: var(--yellow);
+  color: var(--black);
+}

@@ -86,3 +86,26 @@ h3 {
     margin: 0 auto;
   }
 }
+
+.heart-button {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  padding: 0.35rem;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.15s, color 0.15s;
+}
+
+.heart-button:hover {
+  transform: scale(1.15);
+}
+
+.heart-button.active {
+  color: #e50914;
+}

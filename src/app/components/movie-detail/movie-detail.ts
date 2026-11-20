@@ -1,12 +1,15 @@
 import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { MovieDetails } from '../../models/movie';
 import { MovieService } from '../../services/movie.service';
+import { WishlistService } from '../../services/wishlist.service';
 
 @Component({
-  imports: [AsyncPipe, DatePipe, DecimalPipe, RouterLink],
+  imports: [AsyncPipe, DatePipe, DecimalPipe, RouterLink, FontAwesomeModule],
   selector: 'app-movie-detail',
   styleUrl: './movie-detail.css',
   templateUrl: './movie-detail.html',
@@ -14,6 +17,9 @@ import { MovieService } from '../../services/movie.service';
 export class MovieDetail {
   private route = inject(ActivatedRoute);
   private movieService = inject(MovieService);
+  wishlist = inject(WishlistService);
+
+  faHeart = faHeart;
 
   loadError = signal(false);
 

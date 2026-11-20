@@ -1,1 +1,31 @@
-<p>wishlist works!</p>
+<header class="wishlist-header">
+  <h2 class="results-title"><fa-icon [icon]="faHeart" /> My wish list ({{ wishlist.count() }})</h2>
+  <a class="back-link" routerLink="/">← Back to movie list</a>
+</header>
+
+@if (wishlist.count() === 0) {
+  <p class="message">Your wish list is empty. Open a movie and click the heart to add it.</p>
+} @else {
+  <section class="movie-grid">
+    @for (movie of wishlist.movies(); track movie.id) {
+      <div class="wishlist-card">
+        <a class="movie-card" [routerLink]="['/movie', movie.id]">
+          @if (movie.poster_path) {
+            <img [src]="posterUrl(movie)" [alt]="movie.title" loading="lazy" />
+          } @else {
+            <div class="no-poster">No poster</div>
+          }
+          <span class="movie-title">{{ movie.title }}</span>
+        </a>
+        <button
+          type="button"
+          class="remove-button"
+          [attr.aria-label]="'Remove ' + movie.title + ' from wish list'"
+          (click)="wishlist.remove(movie.id)"
+        >
+          <fa-icon [icon]="faTrash" /> Remove
+        </button>
+      </div>
+    }
+  </section>
+}

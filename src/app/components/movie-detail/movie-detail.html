@@ -6,6 +6,17 @@
       } @else {
         <div class="no-poster">No poster</div>
       }
+      <button
+        type="button"
+        class="heart-button"
+        [class.active]="wishlist.has(movie.id)"
+        [attr.aria-pressed]="wishlist.has(movie.id)"
+        [attr.aria-label]="wishlist.has(movie.id) ? 'Remove from wish list' : 'Add to wish list'"
+        [title]="wishlist.has(movie.id) ? 'Remove from wish list' : 'Add to wish list'"
+        (click)="wishlist.toggle(movie)"
+      >
+        <fa-icon [icon]="faHeart" />
+      </button>
     </div>
 
     <div class="info">
