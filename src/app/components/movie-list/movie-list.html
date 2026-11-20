@@ -1,1 +1,22 @@
-<p>movie-list works!</p>
+@if (movies$ | async; as movies) {
+  @if (loadError()) {
+    <p class="message">Could not load the movies. Check your TMDB API key and connection.</p>
+  } @else {
+    <section class="movie-grid">
+      @for (movie of movies; track movie.id) {
+        <a class="movie-card" [routerLink]="['/movie', movie.id]">
+          @if (movie.poster_path) {
+            <img [src]="posterUrl(movie)" [alt]="movie.title" loading="lazy" />
+          } @else {
+            <div class="no-poster">No poster</div>
+          }
+          <span class="movie-title">{{ movie.title }}</span>
+        </a>
+      } @empty {
+        <p class="message">No movies found.</p>
+      }
+    </section>
+  }
+} @else {
+  <p class="message">Loading movies…</p>
+}
