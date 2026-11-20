@@ -3,5 +3,8 @@
   <button type="button" class="wishlist-button" routerLink="/wishlist">
     <fa-icon [icon]="faHeart" class="heart" />
     Wish list
+    @if (wishlistCount() > 0) {
+      <span class="badge">{{ wishlistCount() }}</span>
+    }
   </button>
 </header>

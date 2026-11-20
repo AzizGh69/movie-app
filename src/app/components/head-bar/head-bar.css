@@ -40,3 +40,13 @@ h1 a {
 .heart {
   color: var(--yellow);
 }
+
+.badge {
+  min-width: 1.1rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background-color: var(--yellow);
+  color: #000;
+  font-size: 0.75rem;
+  text-align: center;
+}
